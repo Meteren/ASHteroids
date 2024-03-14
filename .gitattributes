@@ -4,4 +4,3 @@
 *.text -linguist-detectable
 *.in -linguist-detectable
 *.dart linguist-language=dart
-windows/** linguist-documentation
