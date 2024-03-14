@@ -1,3 +1,4 @@
 *.cpp -linguist-detectable
 *.h -linguist-detectable
 *.cmake -linguist-detectable
+*.text -linguist-detectable
