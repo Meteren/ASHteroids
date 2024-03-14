@@ -2,3 +2,4 @@
 *.h -linguist-detectable
 *.cmake -linguist-detectable
 *.text -linguist-detectable
+*.in -linguist-detectable
