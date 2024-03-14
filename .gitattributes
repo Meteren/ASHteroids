@@ -5,3 +5,6 @@
 *.in -linguist-detectable
 *.dart linguist-language=dart
 windows/** linguist-documentation
+lib/*.dart linguist-detectable
+lib/bullet/*.dart linguist-detectable
+lib/space_ship/*.dart linguist-detectable
