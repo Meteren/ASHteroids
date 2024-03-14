@@ -4,5 +4,4 @@
 *.text -linguist-detectable
 *.in -linguist-detectable
 *.dart linguist-language=dart
-** linguist-documentation
 ** linguist-vendored
