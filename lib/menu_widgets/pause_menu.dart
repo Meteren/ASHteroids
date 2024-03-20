@@ -2,9 +2,9 @@ import 'package:ashtroids/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PauseMenu extends StatelessWidget {
-  final Ashteroids game;
-  const PauseMenu({super.key,required this.game});
+class PauseMenuInterface extends StatelessWidget {
+  final Ashteroids _game;
+  const PauseMenuInterface({super.key,required Ashteroids game}) : _game = game;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -22,9 +22,9 @@ class PauseMenu extends StatelessWidget {
                     textStyle: const TextStyle(fontSize:50,color: Colors.white, letterSpacing: .5),
                   ),),
                 IconButton(onPressed: () {
-                  game.resumeEngine();
-                  game.overlays.remove('PauseMenu');
-                  game.overlays.add('PauseButton');
+                  _game.resumeEngine();
+                  _game.overlays.remove('PauseMenu');
+                  _game.overlays.add('PauseButton');
                   },
                     icon: const Icon(Icons.play_arrow),
                     color: Colors.white,)

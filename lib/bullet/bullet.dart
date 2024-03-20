@@ -10,11 +10,11 @@ class Bullet extends ShapeComponent with HasGameRef<Ashteroids>{
   double speed = 250;
   Vector2? spaceShipVelocity;
   Vector2 bulletVelocity = Vector2(0,-1);
-  double? bulletAngle;
+  double? spaceShipAngle;
 
   final bulletPalette = BasicPalette.white.paint();
 
-  Bullet({Vector2? bulletPos, this.spaceShipVelocity,this.bulletAngle,super.priority})
+  Bullet({Vector2? bulletPos, this.spaceShipVelocity,this.spaceShipAngle,super.priority})
       :super(position: bulletPos){
     //debugMode = true;
     size = Vector2(2,14);
@@ -24,7 +24,7 @@ class Bullet extends ShapeComponent with HasGameRef<Ashteroids>{
   @override
   FutureOr<void> onLoad() {
     // TODO: implement onLoad
-    angle = bulletAngle!;
+    angle = spaceShipAngle!;
     bulletVelocity.rotate(angle);
     bulletVelocity = bulletVelocity..scaleTo(speed);
     return super.onLoad();
@@ -46,7 +46,6 @@ class Bullet extends ShapeComponent with HasGameRef<Ashteroids>{
     }else{
       position.add((bulletVelocity) * dt);
     }
-
     gameRef.children.any((element){
       if(Utilities.isOutsideOfBorders(gameRef.size,position) && element is Bullet){
         gameRef.remove(element);

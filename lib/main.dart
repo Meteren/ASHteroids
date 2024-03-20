@@ -8,7 +8,6 @@ import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
-
 import 'menu_widgets/pause_menu.dart';
 
 void main() {
@@ -56,13 +55,13 @@ class _AshteroidPageState extends State<AshteroidPage> {
       body: GameWidget(
           game: _ashteroids ,
           overlayBuilderMap:{
-            'PauseMenu': (BuildContext context, Ashteroids game) => PauseMenu(game:_ashteroids),
-            'PauseButton': pauseMenu,
+            'PauseMenu': (BuildContext context, Ashteroids game) => PauseMenuInterface(game:_ashteroids),
+            'PauseButton': _pauseMenu,
           },),
     );
   }
 
-  Widget pauseMenu(BuildContext context, Ashteroids game) {
+  Widget _pauseMenu(BuildContext context, Ashteroids game) {
     return IconButton(onPressed:(){
       game.pauseEngine();
       game.overlays.remove('PauseButton');
@@ -102,12 +101,11 @@ class Ashteroids extends FlameGame with TapDetector{
     }else{
       add(Bullet(bulletPos:Vector2(spaceShip.position.x,spaceShip.position.y),
           spaceShipVelocity: spaceShip.velocity * spaceShip.speed,
-          bulletAngle: spaceShip.angle));
+          spaceShipAngle: spaceShip.angle));
     }
   }
   @override
   FutureOr<void> onLoad() async{
-    // TODO: implement onLoad
     overlays.add('PauseButton');
     final knobPalette = BasicPalette.darkRed.withAlpha(200).paint();
     final backgroundPalette = BasicPalette.red.withAlpha(100).paint();
@@ -115,10 +113,7 @@ class Ashteroids extends FlameGame with TapDetector{
         knob: CircleComponent(radius: 15, paint: knobPalette),
         background: CircleComponent(radius: 50, paint: backgroundPalette),
         margin: const EdgeInsets.only(left: 20, bottom: 20));
-    //camera.viewport.add(Bullet(bulletPos: Vector2(10,10)));
-
     spaceShip = SpaceShip(joystick: joystick);
-
     parallax = await loadParallaxComponent(
         pList,
         baseVelocity: universeSpeed,
@@ -140,7 +135,7 @@ class Ashteroids extends FlameGame with TapDetector{
     }else{
       parallax.parallax!.baseVelocity = spaceShip.velocity + universeSpeed;
     }
-    print(children.length) ;
+    //print(children.length) ;
   }
 }
 
