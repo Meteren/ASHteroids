@@ -14,7 +14,7 @@ class Bullet extends ShapeComponent with HasGameRef<Ashteroids>{
 
   final bulletPalette = BasicPalette.white.paint();
 
-  Bullet({Vector2? bulletPos, this.spaceShipVelocity,this.bulletAngle})
+  Bullet({Vector2? bulletPos, this.spaceShipVelocity,this.bulletAngle,super.priority})
       :super(position: bulletPos){
     //debugMode = true;
     size = Vector2(2,14);
