@@ -25,9 +25,6 @@ class Heart extends PositionComponent with HasGameRef<Ashteroids>{
   @override
   void update(double dt) {
     // TODO: implement update
-    if(heartNumber == 3){
-      print('component counter${gameRef.spaceShip.children.length}');
-    }
     super.update(dt);
     //print(gameRef.spaceShip.health);
     if(gameRef.spaceShip.health < heartNumber){
