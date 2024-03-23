@@ -41,7 +41,6 @@ class Heart extends PositionComponent with HasGameRef<Ashteroids>{
               repeatCount: 5
           ))..removeOnFinish = true);
       heartAnimation.animationTicker?.completed.whenComplete((){
-        print('completed');
         heartSprite.current = HeartContent.background;
         heartAnimation.removeFromParent();
         heartNumber = -1;
