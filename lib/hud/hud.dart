@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:ashtroids/hud_components/heart/heart.dart';
 import 'package:ashtroids/main.dart';
 import 'package:flame/components.dart';
+import 'hud_components/heart/heart.dart';
 
 class Hud extends PositionComponent with HasGameRef<Ashteroids>{
   late Heart heart;
