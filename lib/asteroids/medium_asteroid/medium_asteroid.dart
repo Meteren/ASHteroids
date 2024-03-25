@@ -4,12 +4,12 @@ import 'dart:ui';
 import 'package:ashtroids/asteroids/abstract_asteroid.dart';
 import 'package:flame/components.dart';
 
-class SmallAsteroid extends Asteroid{
+class MediumAsteroid extends Asteroid{
 
-  SmallAsteroid(Vector2 position,Vector2 size,Vector2 velocity)
+  MediumAsteroid(Vector2 position,Vector2 size,Vector2 velocity)
       : super(position: position,size: size,velocity: velocity);
 
-  SmallAsteroid.fullInit(Vector2 size, Vector2 position,Vector2 velocity,
+  MediumAsteroid.fullInit(Vector2 size, Vector2 position,Vector2 velocity,
       int? health,int damage,double speed) : super.fullInit(size,position,velocity,health,damage,speed);
 
   @override

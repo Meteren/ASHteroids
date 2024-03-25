@@ -5,7 +5,7 @@ import '../main.dart';
 
 class SpaceShip extends SpriteComponent with HasGameRef<Ashteroids>{
 
-  int health = 3;
+  double health = 50;
   double speed = 200;
   Vector2 spaceShipSize = Vector2(50, 50);
   Vector2 velocity = Vector2.zero();

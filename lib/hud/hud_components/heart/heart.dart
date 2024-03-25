@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:ashtroids/main.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
+import '../life_bar/life_bar.dart';
 import 'heart_contents/heart_animation.dart';
 import 'heart_contents/heart_sprite.dart';
 
@@ -9,7 +10,8 @@ class Heart extends PositionComponent with HasGameRef<Ashteroids>{
   late HeartSprite heartSprite;
   late HeartAnimation heartAnimation;
   int heartNumber;
-  Heart({required Vector2 position,required Vector2 size,required this.heartNumber}) : super(
+  LifeBar lifeBar;
+  Heart({required Vector2 position,required Vector2 size,required this.heartNumber,required this.lifeBar}) : super(
     position: position,
     size: size
   );
@@ -26,8 +28,7 @@ class Heart extends PositionComponent with HasGameRef<Ashteroids>{
   void update(double dt) {
     // TODO: implement update
     super.update(dt);
-    //print(gameRef.spaceShip.health);
-    if(gameRef.spaceShip.health < heartNumber){
+    if(lifeBar.lifeBarHeartStateHolder < heartNumber){
       //print("heart destroyed");
       add(heartAnimation);
       heartAnimation.animation = heartAnimation.heartFading;
@@ -37,10 +38,17 @@ class Heart extends PositionComponent with HasGameRef<Ashteroids>{
               alternate: true,
               repeatCount: 5
           ))..removeOnFinish = true);
-      heartAnimation.animationTicker?.completed.whenComplete((){
+        heartAnimation.animationTicker?.completed.whenComplete((){
         heartSprite.current = HeartContent.background;
         heartAnimation.removeFromParent();
+        print(lifeBar.lifeBarHeartStateHolder);
+
+        if(lifeBar.lifeBarHeartStateHolder != -1){
+          lifeBar.lifeBarElements[1].size.y = lifeBar.size.y;
+        }
         heartNumber = -1;
+        gameRef.spaceShip.health = lifeBar.lifeBarElements[1].size.y;
+
       });
     }
     super.update(dt);

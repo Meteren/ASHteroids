@@ -134,7 +134,7 @@ class Ashteroids extends FlameGame with TapDetector{
     if(overlays.isActive('PauseMenu') || spaceShip.isRemoved){
 
     }else{
-      spaceShip.health -= 1;
+      spaceShip.health -= 10;
       add(Bullet(bulletPos:Vector2(spaceShip.position.x,spaceShip.position.y),
           spaceShipVelocity: spaceShip.velocity * spaceShip.speed,
           spaceShipAngle: spaceShip.angle));
