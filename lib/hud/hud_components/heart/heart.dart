@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:ashtroids/main.dart';
 import 'package:flame/components.dart';
-import 'package:flame/effects.dart';
 import '../life_bar/life_bar.dart';
 import 'heart_contents/heart_animation.dart';
 import 'heart_contents/heart_sprite.dart';
@@ -30,18 +29,12 @@ class Heart extends PositionComponent with HasGameRef<Ashteroids>{
     super.update(dt);
     if(lifeBar.lifeBarHeartStateHolder < heartNumber){
       //print("heart destroyed");
-      add(heartAnimation);
-      heartAnimation.animation = heartAnimation.heartFading;
-      heartAnimation.animationTicker?.onStart = () => gameRef.spaceShip.add(
-          OpacityEffect.fadeOut(EffectController(
-              duration: 0.1,
-              alternate: true,
-              repeatCount: 5
-          ))..removeOnFinish = true);
+        add(heartAnimation);
+        heartAnimation.animation = heartAnimation.heartFading;
         heartAnimation.animationTicker?.completed.whenComplete((){
         heartSprite.current = HeartContent.background;
         heartAnimation.removeFromParent();
-        print(lifeBar.lifeBarHeartStateHolder);
+       //print(lifeBar.lifeBarHeartStateHolder);
 
         if(lifeBar.lifeBarHeartStateHolder != -1){
           lifeBar.lifeBarElements[1].size.y = lifeBar.size.y;

@@ -20,8 +20,6 @@ class LifeBar extends PositionComponent with HasGameRef<Ashteroids>{
     )
   );
 
-
-
   LifeBar(Vector2 position) : super(position: position){
     size = barSize;
   }
@@ -58,7 +56,7 @@ class LifeBar extends PositionComponent with HasGameRef<Ashteroids>{
       if(lifeBarHeartStateHolder !=-1){
         lifeBarHeartStateHolder--;
       }
-      print(lifeBarHeartStateHolder);
+      //print(lifeBarHeartStateHolder);
       gameRef.spaceShip.health--;
     }
 

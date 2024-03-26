@@ -1,6 +1,4 @@
 
-
-
 import 'dart:async';
 import 'dart:ui';
 import 'package:ashtroids/asteroids/abstract_asteroid.dart';

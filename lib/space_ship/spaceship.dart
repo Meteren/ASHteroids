@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:ashtroids/utilities.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import '../main.dart';
 
 class SpaceShip extends SpriteComponent with HasGameRef<Ashteroids>{
@@ -10,6 +11,7 @@ class SpaceShip extends SpriteComponent with HasGameRef<Ashteroids>{
   Vector2 spaceShipSize = Vector2(50, 50);
   Vector2 velocity = Vector2.zero();
   JoystickComponent? joystick;
+  bool isHit = false;
 
   SpaceShip({this.joystick}): super(){
     size = spaceShipSize;
@@ -17,6 +19,8 @@ class SpaceShip extends SpriteComponent with HasGameRef<Ashteroids>{
     flipVerticallyAroundCenter();
     flipHorizontallyAroundCenter();
   }
+
+
 
   @override
   FutureOr<void> onLoad () async{
@@ -30,6 +34,7 @@ class SpaceShip extends SpriteComponent with HasGameRef<Ashteroids>{
   void update(double dt) {
     // TODO: implement update
     super.update(dt);
+    print(children.length);
     if(!joystick!.delta.isZero()){
       velocity = joystick!.relativeDelta * speed;
       position.add(velocity * dt);

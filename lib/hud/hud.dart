@@ -4,7 +4,6 @@ import 'package:flame/components.dart';
 import 'hud_components/heart/heart.dart';
 import 'hud_components/life_bar/life_bar.dart';
 
-
 class Hud extends PositionComponent with HasGameRef<Ashteroids>{
   late Heart heart;
   late LifeBar lifeBar;
@@ -37,6 +36,7 @@ class Hud extends PositionComponent with HasGameRef<Ashteroids>{
   @override
   void update(double dt) {
     // TODO: implement update
+    //print(children.length);
     if(lifeBar.lifeBarHeartStateHolder == 0){
       gameRef.add(gameRef.createExplosion(gameRef.spaceShip.position));
       gameRef.overlays.add('GameOverMenu');

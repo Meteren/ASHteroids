@@ -4,6 +4,7 @@ import 'package:ashtroids/hud/hud.dart';
 import 'package:ashtroids/menu_widgets/game_over_menu.dart';
 import 'package:ashtroids/space_ship/spaceship.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
@@ -131,13 +132,34 @@ class Ashteroids extends FlameGame with TapDetector{
   void onTapUp(TapUpInfo info) {
     // TODO: implement onTapUp
     super.onTapUp(info);
+    Rect boundaries = spaceShip.toRect();
+    double spaceShipXLeftRange = boundaries.left;
+    double spaceShipXRightRange = boundaries.left + boundaries.width;
+    double spaceShipYTopRange = boundaries.top;
+    double spaceShipYBottomRange = boundaries.top + boundaries.height;
     if(overlays.isActive('PauseMenu') || spaceShip.isRemoved){
 
     }else{
-      spaceShip.health -= 10;
-      add(Bullet(bulletPos:Vector2(spaceShip.position.x,spaceShip.position.y),
-          spaceShipVelocity: spaceShip.velocity * spaceShip.speed,
-          spaceShipAngle: spaceShip.angle));
+      if(info.eventPosition.global.x > spaceShipXLeftRange
+          && spaceShipXRightRange > info.eventPosition.global.x &&
+          info.eventPosition.global.y > spaceShipYTopRange &&
+          spaceShipYBottomRange > info.eventPosition.global.y && !spaceShip.isHit
+          ){
+        spaceShip.isHit = true;
+        spaceShip.health -= 10;
+        spaceShip.add(OpacityEffect.fadeOut(
+            EffectController(
+                duration: 0.1,
+                alternate: true,
+                repeatCount: 5))..removeOnFinish = true..onComplete = () => spaceShip.isHit = false);
+      }else{
+        if(!spaceShip.isHit){
+          add(Bullet(bulletPos:Vector2(spaceShip.position.x,spaceShip.position.y),
+              spaceShipVelocity: spaceShip.velocity * spaceShip.speed,
+              spaceShipAngle: spaceShip.angle));
+        }
+      }
+
     }
   }
   @override
@@ -168,6 +190,7 @@ class Ashteroids extends FlameGame with TapDetector{
   @override
   void update(double dt) {
     // TODO: implement update
+    //print(children.length);
     super.update(dt);
     if(joystick.delta.isZero()){
       parallax.parallax!.baseVelocity = universeSpeed;
